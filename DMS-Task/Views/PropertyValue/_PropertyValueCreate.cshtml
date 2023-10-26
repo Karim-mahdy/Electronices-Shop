@@ -1,0 +1,16 @@
+﻿@using DMS_Task.ViewModels
+@model PropertyValuesVM
+
+<form asp-action="SavePropertyValues" asp-controller="YourController" method="post">
+    <input type="hidden" asp-for="deviceId" />
+    @foreach (var property in Model.DeviceCategory.PropertyItems)
+    {
+        <div class="form-group">
+            <label asp-for="@property.PropertyDescription"></label>
+            <input asp-for="PropertyValues[@property.ID].Value" class="form-control" />
+            <input type="hidden" asp-for="PropertyValues[@property.ID].PropertyItemID" />
+            
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

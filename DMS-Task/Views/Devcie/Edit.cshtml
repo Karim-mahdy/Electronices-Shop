@@ -1,0 +1,49 @@
+﻿@using DMS_Task.ViewModels
+@model DeviceProperteiseValuesVM
+
+@{
+    ViewData["Title"] = "Edit Device Property";
+}
+
+<h1>Edit Device Property</h1>
+<div class="container">
+    <h1 class="my-5 text-center">Device Property</h1>
+    <form asp-action="Edit" method="post" class="w-50 mx-auto">
+        <input asp-for="ID" disabled hidden />
+
+        <div class="mb-3">
+            <label asp-for="DeviceName" class="form-label"></label>
+            <input asp-for="DeviceName" class="form-control" placeholder="Enter Device Name" />
+            <span asp-validation-for="DeviceName" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AcquisitionDate" class="form-label"></label>
+            <input asp-for="AcquisitionDate" class="form-control" />
+            <span asp-validation-for="AcquisitionDate" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="Memo" class="form-label"></label>
+            <textarea asp-for="Memo" class="form-control" rows="4"></textarea>
+            <span asp-validation-for="Memo" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="CategoryName" class="form-label"></label>
+            <input asp-for="CategoryId" hidden />
+            <select asp-for="CategoryId" asp-items="Model.Gategories" class="form-control">
+                <option value="">Select a Category</option>
+            </select>
+            <span asp-validation-for="CategoryId" class="text-danger"></span>
+        </div>
+
+        <div class="text-center my-5">
+            <a asp-action="Index" class="btn btn-warning">Back</a>
+            <button type="submit" class="btn btn-success mx-3">Save Changes</button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}

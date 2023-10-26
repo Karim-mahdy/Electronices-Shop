@@ -1,0 +1,43 @@
+﻿@using DMS_Task.ViewModels;
+@model IEnumerable<PropertyDeviceCategoryVM>
+
+@{
+    ViewData["Title"] = "Property List";
+}
+
+<h1 class="text-center mt-5 text-warning">Property List</h1>
+<div class="container mt-5">
+    <a asp-action="Create" class="btn btn-success mb-3">Create Property</a>
+    <table class="table align-middle table-hover">
+        <thead class="table-warning">
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Property Name</th>
+                <th>Category</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Id</td>
+                    <td>@item.Name</td>
+                    <td>@item.CategoryName</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary mx-2">
+                            Edit
+                        </a>
+                        <a asp-action="Details" asp-route-id="@item.Id" class="btn btn-warning mx-2" disabled>
+                            Details
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger mx-2" disabled>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+

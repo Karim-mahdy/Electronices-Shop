@@ -1,0 +1,41 @@
+﻿@using DMSTask.Domain.Entities;
+@model IEnumerable<DeviceCategory>
+@{
+    ViewData["Title"] = "Category List";
+}
+
+<h1 class="text-center mt-5 text-warning">@ViewData["Title"]</h1>
+<div class="container mt-5">
+    <a asp-action="Create" class="btn btn-success mb-3">Create Category</a>
+    <table class="table align-middle table-hover">
+        <thead class="table-warning">
+            <tr class="text-center">
+                <th>ID</th>
+                <th>Category Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody class="text-center">
+            @foreach (var category in Model)
+            {
+                <tr>
+                    <td>@category.ID</td>
+                    <td>@category.CategoryName</td>
+                    <td>
+                        <a asp-action="Update" asp-route-id="@category.ID" class="btn btn-primary mx-2">
+                             Edit
+                        </a>
+                        <a asp-action="Details" asp-route-id="@category.ID" class="btn btn-warning mx-2" disabled>
+                            Details
+                        </a>
+                        <a asp-action="Delete" asp-route-id="@category.ID"   class="btn btn-danger mx-2" disabled>
+                            Delete
+                        </a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+ 

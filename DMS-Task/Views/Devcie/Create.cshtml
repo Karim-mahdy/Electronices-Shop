@@ -1,0 +1,106 @@
+﻿@using DMS_Task.ViewModels
+@model DeviceProperteiseValuesVM
+
+@{
+    ViewData["Title"] = "Create Device ";
+}
+
+
+<div class="container">
+   
+    <div class="row">
+        <div class="col-6">
+            <h1>Create Device </h1>
+            <h1 class="my-5 text-center">Device</h1>
+            <form asp-action="Create" method="post" class="w-50 mx-auto">
+                <div class="mb-3">
+
+
+                    @if (Model.ID == 0)
+                    {
+                        <label asp-for="CategoryId" class="form-label">Category</label>
+                        <select asp-for="CategoryId" asp-items="Model.Gategories" class="form-control">
+                            <option value="">Select a Category</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    }
+                    else
+                    {
+
+                        <label asp-for="CategoryId" class="form-label">Category</label>
+                        <select asp-for="CategoryId" disabled asp-items="Model.Gategories" class="form-control">
+                            <option value="">Select a Category</option>
+                        </select>
+                        <span asp-validation-for="CategoryId" class="text-danger"></span>
+                    }
+
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="DeviceName" class="form-label"></label>
+                    <input asp-for="DeviceName" class="form-control" placeholder="Enter Device Name">
+                    <span asp-validation-for="DeviceName" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="AcquisitionDate" class="form-label"></label>
+                    <input asp-for="AcquisitionDate" class="form-control" placeholder="Enter Acquisition Date">
+                    <span asp-validation-for="AcquisitionDate" class="text-danger"></span>
+                </div>
+
+                <div class="mb-3">
+                    <label asp-for="Memo" class="form-label"></label>
+                    <textarea asp-for="Memo" class="form-control" placeholder="Enter Memo"></textarea>
+                    <span asp-validation-for="Memo" class="text-danger"></span>
+                </div>
+
+
+                <div class="text-center my-5">
+                    <a asp-action="Index" class="btn btn-warning">Back</a>
+                    @if (Model.ID == 0)
+                    {
+                        <button type="submit" class="btn btn-success mx-3">Create</button>
+                    }
+
+                </div>
+            </form>
+
+        </div>
+        <div class="col-6">
+
+            <h1>Create Property Values</h1>
+            <div id="result">
+                <!-- This is where the property values form will be loaded via AJAX -->
+            </div>
+            <button id="ajaxButton" class="btn btn-primary">Load Property Values</button>
+
+        </div>
+    </div>
+
+  
+
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+}
+@if (Model.ID != 0)
+{
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#ajaxButton").click(function () {
+                $.ajax({
+                    url: "/PropertyValue/Create?categoryId=@Model.CategoryId&deviceId=@Model.ID",
+                    type: "GET",
+                    success: function (data) {
+                        // Update the result div with the returned partial view
+                        $("#result").html(data);
+                    },
+                    error: function () {
+                        alert("An error occurred.");
+                    }
+                });
+            });
+        });
+    </script>
+}

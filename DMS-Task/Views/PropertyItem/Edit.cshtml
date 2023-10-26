@@ -1,0 +1,37 @@
+﻿@using DMS_Task.ViewModels
+@model PropertyDeviceCategoryVM
+
+@{
+    ViewData["Title"] = "Edit Property";
+}
+
+<h1>Edit Property</h1>
+<div class="container">
+    <h1 class="my-5 text-center">Property</h1>
+    <form asp-action="Edit" method="post" class="w-50 mx-auto">
+        <input asp-for="Id" disabled hidden />
+        <div class="mb-3">
+            <label for="Name" class="form-label">Property Name</label>
+            <input type="text" class="form-control" placeholder="Enter Property Name" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="CategoryID" class="form-label">Category</label>
+            <input asp-for="CategoryID" hidden />
+            <select class="form-control" disabled asp-for="CategoryID" asp-items="Model.Gategories">
+                <option value="">Select a Category</option>
+            </select>
+            <span asp-validation-for="CategoryID" class="text-danger"></span>
+        </div>
+
+        <div class="text-center my-5">
+            <a asp-action="Index" class="btn btn-warning">Back</a>
+            <button type="submit" class="btn btn-success mx-3">Save Changes</button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}

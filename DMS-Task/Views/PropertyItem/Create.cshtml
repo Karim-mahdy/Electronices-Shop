@@ -1,0 +1,35 @@
+﻿@using DMS_Task.ViewModels;
+@model PropertyDeviceCategoryVM
+
+@{
+    ViewData["Title"] = "Create Property";
+}
+
+<h1>Create Property</h1>
+<div class="container">
+    <h1 class="my-5 text-center">Property</h1>
+    <form asp-action="Create" method="post" class="w-50 mx-auto">
+        <div class="mb-3">
+            <label for="CategoryID" class="form-label">Category</label>
+            <select class="form-control" asp-for="CategoryID" asp-items="Model.Gategories">
+                <option value="">Select a Category</option>
+            </select>
+            <span asp-validation-for="CategoryID" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3">
+            <label for="Name" class="form-label">Property Name</label>
+            <input type="text" class="form-control" placeholder="Enter Property Name" asp-for="Name">
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="text-center my-5">
+            <a asp-action="Index" class="btn btn-warning">Back</a>
+            <button type="submit" class="btn btn-success mx-3">Create</button>
+        </div>
+    </form>
+</div>
+@section Scripts{
+    <partial name="_ValidationScriptsPartial" />
+
+}
